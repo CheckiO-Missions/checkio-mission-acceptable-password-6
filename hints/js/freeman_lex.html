@@ -9,20 +9,20 @@
         <p>
             Let's continue with the solution from hints of the previous mission in the series.
         </p>
-        <pre class="brush: python">
-def is_acceptable_password(password: str) -> bool:
+        <pre class="brush: javascript">
+function isAcceptablePassword(password: string): boolean {
 
-    cond1 = len(password) > 6
-    cond2 = any(char.isdigit() for char in password)
-    cond3 = any(char.isalpha() for char in password)
-    if len(password) > 9: # cond4    
-        cond2 = cond3 = True
-    cond5 = 'password' not in password.lower()
-        
-    return all([cond1, cond2, cond3, cond5])        
+    const cond1 = password.length > 6;
+    var cond2 = /\d/.test(password);
+    var cond3 = /\D/.test(password);
+    if (password.length > 9) cond2 = cond3 = true; // cond 4
+    const cond5 = !(/password/i.test(password));
+    
+    return !([cond1, cond2, cond3, cond5].includes(false));
+}   
         </pre>
         <p>
-            In this mission you should add to this solution checking if password contains at least three distinct characters.
+            In this mission you should add to your solution checking if password contains at least three distinct characters.
         </p>
     </div>
 </div>
@@ -34,36 +34,29 @@ def is_acceptable_password(password: str) -> bool:
     </div>
     <div class="answer">
         <p>
-            To count the number of elements in sequence just use <b class="code">len()</b> function and it should be bigger then 2.
+            First, you need to convert <b class="code">password</b> into array with <a target="_blank" href="https://www.w3schools.com/jsref/jsref_split.asp">split()</a> method with argument of empty character. 
         </p>
-        <pre class="brush: python">
-cond6 = len(...) > 2        
+        <pre class="brush: javascript">
+password.split("")    
+        </pre>
+        <p>
+            Then, convert the array into <a target="_blank" href="https://www.w3schools.com/js/js_object_sets.asp">Set()</a> to keep only unique characters.
+        </p>
+        <pre class="brush: javascript">
+new Set(password.split(""))
         </pre>
     </div>
 </div>
 <div class="question-answer">
     <div class="question">
         <p>
-            Ok. But I need to count only unique elements. How to do this?
+            But how to check, if thw set has at least three characters?
         </p>
     </div>
     <div class="answer">
         <p>
-            Read about <a target="_blank" href="https://www.w3schools.com/python/python_sets.asp">sets</a>. It allows only distinct elements.
+            Sets have such property as <b class="code">size</b>. It is similar to <b class="code">length</b> for strings.
         </p>
-        <pre class="brush: python">
-ar = [1, 2, 3, 2, 3]
-print(set(ar))
-        </pre>
-        <div class="output">
-            <p>Output:</p>
-            <pre>{1, 2, 3}</pre>
-        </div>
-        <p>
-            You should create set from your password and use it as argument in <b class="code">len()</b>.
-        </p>
-    </div>
-</div>
 <div class="question-answer">
     <div class="question">
         <p>
@@ -74,11 +67,11 @@ print(set(ar))
         <p>
             Look:
         </p>
-        <pre class="brush: python">
-cond6 = len(set(password)) > 2        
+        <pre class="brush: javascript">
+const cond6 = new Set(password.split("")).size > 2;       
         </pre>
         <p>
-            And don't forget to add your new condition into <b class="code">all()</b> function in <b class="code">return</b>.
+            And don't forget to add your new condition into array in <b class="code">return</b>.
         </p>
     </div>
 </div>
@@ -93,27 +86,27 @@ cond6 = len(set(password)) > 2
             Here it is:
         </p>
         <div class="spoiler">
-        <pre class="brush: python">
-def is_acceptable_password(password: str) -> bool:
+        <pre class="brush: javascript">
+function isAcceptablePassword(password: string): boolean {
+
+    const cond1 = password.length > 6;
+    var cond2 = /\d/.test(password);
+    var cond3 = /\D/.test(password);
+    if (password.length > 9) cond2 = cond3 = true; // cond 4
+    const cond5 = !(/password/i.test(password));
+    const cond6 = new Set(password.split("")).size > 2;
     
-    cond1 = len(password) > 6
-    cond2 = any(char.isdigit() for char in password)
-    cond3 = any(char.isalpha() for char in password)
-    if len(password) > 9: # cond4    
-        cond2 = cond3 = True
-    cond5 = 'password' not in password.lower()
-    cond6 = len(set(password)) > 2
-        
-    return all([cond1, cond2, cond3, cond5, cond6])     
+    return !([cond1, cond2, cond3, cond5, cond6].includes(false));
+}    
         </pre>
         </div>
     </div>
 </div>
-<div class="question-answer">
+<!-- <div class="question-answer">
     <div class="question">
         <p>
             Show me more solutions!<br />
-            'Cause I wanna be a real 🥇 Python Ninnjaa!
+            'Cause I wanna be a real 🥇 javascript Ninnjaa!
         </p>
     </div>
     <div class="answer">
@@ -124,7 +117,7 @@ def is_acceptable_password(password: str) -> bool:
             Using dictionary to store conditions in text as keys, and conditional expressions as values.
         </p>
         <div class="spoiler">
-        <pre class="brush: python">
+        <pre class="brush: javascript">
 def is_acceptable_password(password: str) -> bool:
 
     conditions = {}
@@ -144,7 +137,7 @@ def is_acceptable_password(password: str) -> bool:
             If you still need all checking functions. Using previous function in next adding new condition:
         </p>
         <div class="spoiler">
-        <pre class="brush: python">            
+        <pre class="brush: javascript">            
 def is_acceptable_passwordI(password: str) -> bool:
     return len(password) > 6
         
@@ -168,7 +161,7 @@ def is_acceptable_password(password):
             Using regular expressions module, look for substring bigger then 6, with digit and not digit character or substring bigger then 9. Both should not contain 'password'.
         </p>
         <div class="spoiler">
-        <pre class="brush: python">
+        <pre class="brush: javascript">
 import re
 
 
@@ -184,7 +177,7 @@ def is_acceptable_password(p):
         interesting solutions!
         </b></p>
     </div>
-</div>
+</div> -->
 <div class="question-answer">
     <div class="question">
         <p>
