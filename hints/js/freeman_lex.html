@@ -104,11 +104,11 @@ function isAcceptablePassword(password: string): boolean {
         </div>
     </div>
 </div>
-<!-- <div class="question-answer">
+<div class="question-answer">
     <div class="question">
         <p>
             Show me more solutions!<br />
-            'Cause I wanna be a real 🥇 javascript Ninnjaa!
+            'Cause I wanna be a real 🥇 Javascript Hero!
         </p>
     </div>
     <div class="answer">
@@ -116,70 +116,20 @@ function isAcceptablePassword(password: string): boolean {
             Sure, grab it!
         </p>
         <p>
-            Using dictionary to store conditions in text as keys, and conditional expressions as values.
+            Anonymous function, which check first if the word "password" is present in any case, then, creating set and checking its length (size), then checking if the length is more than 9 OR more than 6 and has at least one digit and one letter. These regex are tested with method <b class="code">test()</b>.
         </p>
         <div class="spoiler">
         <pre class="brush: javascript">
-def is_acceptable_password(password: str) -> bool:
-
-    conditions = {}
-    conditions['length is bigger than 6'] = len(password) > 6
-    conditions['has at least 1 digit'] = any([ch.isdigit() for ch in password])
-    conditions['not just digits'] = any([not ch.isdigit() for ch in password])
-    conditions['no word "password"'] = 'password' not in password.lower()
-    conditions['3 different characters'] = len(set(password)) >= 3
-    if len(password) > 9:
-        del conditions['has at least 1 digit']
-        del conditions['not just digits']
-
-    return all(conditions.values())
-        </pre>
-        </div>
-        <p>
-            If you still need all checking functions. Using previous function in next adding new condition:
-        </p>
-        <div class="spoiler">
-        <pre class="brush: javascript">            
-def is_acceptable_passwordI(password: str) -> bool:
-    return len(password) > 6
-        
-def is_acceptable_passwordII(password):
-    return is_acceptable_passwordI(password) and any([c in '0123456789' for c in password])
-
-def is_acceptable_passwordIII(password):
-    return is_acceptable_passwordII(password) and not all([c in '0123456789' for c in password])
-
-def is_acceptable_passwordIV(password):
-    return is_acceptable_passwordIII(password) or len(password) > 9
-
-def is_acceptable_passwordV(password):
-    return is_acceptable_passwordIV(password) and not 'password' in password.lower()
-
-def is_acceptable_password(password):
-    return is_acceptable_passwordV(password) and len(set(list(password))) >= 3
-        </pre>
-        </div>
-        <p>
-            Using regular expressions module, look for substring bigger then 6, with digit and not digit character or substring bigger then 9. Both should not contain 'password'.
-        </p>
-        <div class="spoiler">
-        <pre class="brush: javascript">
-import re
-
-
-def is_acceptable_password(p):
-
-    return (bool(re.match(r'(?=.{6,})(?=.*\d.*)(?=.*\D.*)', p)) or           \
-    bool(re.match(r'.{9,}', p))) and not bool(re.search(r'(?i)password', p)) \
-    and len(set(p)) >= 3        
+var isAcceptablePassword = pwd => !pwd.match(/password/i)
+&& new Set([...pwd]).size>2
+&& (pwd.length > 9 || [/.{7,}/, /\d/, /[a-z]/i].every(x=>x.test(pwd)))
         </pre>
         </div>
         <p><b>
-            Click "Best solutions" at mission menu and see a lot of other
-        interesting solutions!
+            Click "Best solutions" at mission menu and see a lot of other interesting solutions!
         </b></p>
     </div>
-</div> -->
+</div>
 <div class="question-answer">
     <div class="question">
         <p>
