@@ -1,0 +1,145 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Je n'ai aucune idée de la manière de commencer à résoudre cette mission.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Continuons avec la solution des indices de la mission précédente de la série.
+        </p>
+        <pre class="brush: javascript">
+function isAcceptablePassword(password: string): boolean {
+
+    const cond1 = password.length > 6;
+    var cond2 = /\d/.test(password);
+    var cond3 = /\D/.test(password);
+    if (password.length > 9) cond2 = cond3 = true; // cond 4
+    const cond5 =!(/password/i.test(password));
+    
+    return!([cond1, cond2, cond3, cond5].includes(false));
+}   
+        </pre>
+        <p>
+            Dans cette mission, vous devez ajouter à votre solution la vérification que le mot de passe contient au moins trois caractères distincts.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Par quoi dois-je commencer?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Tout d'abord, vous devez convertir le <b class="code">mot de passe</b> en tableau à l'aide de la méthode <a target="_blank" href="https://www.w3schools.com/jsref/jsref_split.asp">split()</a> dont l'argument est un caractère vide. 
+        </p>
+        <pre class="brush: javascript">
+password.split("")    
+        </pre>
+        <p>
+            Ensuite, convertissez le tableau en <a target="_blank" href="https://www.w3schools.com/js/js_object_sets.asp">Set(</a> ) pour ne conserver que les caractères uniques.
+        </p>
+        <pre class="brush: javascript">
+new Set(password.split(""))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Mais comment vérifier si l'ensemble contient au moins trois caractères?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Les ensembles ont une propriété appelée <b class="code">taille</b>. Elle est similaire à la <b class="code">longueur</b> des chaînes de caractères.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Montrez-moi la ligne entière s'il vous plaît.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Regardez:
+        </p>
+        <pre class="brush: javascript">
+const cond6 = new Set(password.split("")).size > 2;       
+        </pre>
+        <p>
+            N'oubliez pas d'ajouter votre nouvelle condition dans le tableau en <b class="code">retour</b>.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Alors, à quoi devrait ressembler ma solution finale?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            La voici:
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function isAcceptablePassword(password: string): boolean {
+
+    const cond1 = password.length > 6;
+    var cond2 = /\d/.test(password);
+    var cond3 = /\D/.test(password);
+    if (password.length > 9) cond2 = cond3 = true; // cond 4
+    const cond5 =!(/password/i.test(password));
+    const cond6 = new Set(password.split("")).size > 2;
+    
+    return!([cond1, cond2, cond3, cond5, cond6].includes(false));
+}    
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Montrez-moi plus de solutions!<br />
+            parce que je veux être un vrai 🥇 Javascript Hero!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Bien sûr, prenez-le!
+        </p>
+        <p>
+            Fonction anonyme, qui vérifie d'abord si le mot "mot de passe" est présent dans tous les cas, puis crée un ensemble et vérifie sa longueur (taille), puis vérifie si la longueur est supérieure à 9 OU supérieure à 6 et comporte au moins un chiffre et une lettre. Ces regex sont testées avec la méthode <b class="code">test().</b>
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+var isAcceptablePassword = pwd =>!pwd.match(/password/i)
+&& new Set([...pwd]).size>2
+&& (pwd.length > 9 || [/.{7,}/, /\d/, /[a-z]/i].every(x=>x.test(pwd)))
+        </pre>
+        </div>
+        <p><b>
+            Cliquez sur "Meilleures solutions" dans le menu de la mission et voyez beaucoup d'autres solutions intéressantes!
+        </b></p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Je vous remercie! Je sais et je comprends mieux maintenant! Tout fonctionne bien!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            👍 Heureux de l'apprendre! Félicitations pour votre réussite à la série!
+        </p>
+    </div>
+</div>
+</body>
