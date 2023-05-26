@@ -98,7 +98,7 @@ function isAcceptablePassword(password: string): boolean {
     const cond5 =!(/password/i.test(password));
     const cond6 = new Set(password.split("")).size > 2;
     
-    return!([cond1, cond2, cond3, cond5, cond6].includes(false));
+    return !([cond1, cond2, cond3, cond5, cond6].includes(false));
 }    
         </pre>
         </div>
