@@ -1,0 +1,200 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Nie mam pojęcia, jak zacząć rozwiązywać tę misję.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Kontynuujmy z rozwiązaniem z podpowiedzi poprzedniej misji w serii.
+        </p>
+        <pre class="brush: python">
+def is_acceptable_password(password: str) -> bool:
+
+    cond1 = len(password)> 6
+    cond2 = any(char.isdigit() for char in password)
+    cond3 = any(char.isalpha() for char in password)
+    if len(password)> 9: # cond4    
+        cond2 = cond3 = True
+    cond5 = 'password' not in password.lower()
+        
+    return all([cond1, cond2, cond3, cond5])        
+        </pre>
+        <p>
+            W tej misji należy dodać do tego rozwiązania sprawdzanie, czy hasło zawiera co najmniej trzy różne znaki.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Od czego powinienem zacząć?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Aby policzyć liczbę elementów w sekwencji, proszę użyć funkcji <b class="code">len()</b> i powinna ona być większa niż 2.
+        </p>
+        <pre class="brush: python">
+cond6 = len(...)> 2        
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ok. Ale muszę policzyć tylko unikalne elementy. Jak to zrobić?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Proszę przeczytać o <a target="_blank" href="https://www.w3schools.com/python/python_sets.asp">sets</a>. Pozwala ona zliczać tylko odrębne elementy.
+        </p>
+        <pre class="brush: python">
+ar = [1, 2, 3, 2, 3]
+print(set(ar))
+        </pre>
+        <div class="output">
+            <p>Wynik:</p>
+            <pre>{1, 2, 3}</pre>
+        </div>
+        <p>
+            Proszę utworzyć zestaw z hasła i użyć go jako argumentu w <b class="code">len()</b>.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Proszę pokazać mi całą linię.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Proszę spojrzeć:
+        </p>
+        <pre class="brush: python">
+cond6 = len(set(password))> 2        
+        </pre>
+        <p>
+            I proszę nie zapomnieć dodać swojego nowego warunku do funkcji <b class="code">all()</b> w <b class="code">return</b>.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Jak więc powinno wyglądać moje ostateczne rozwiązanie?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Oto ono:
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_acceptable_password(password: str) -> bool:
+    
+    cond1 = len(password)> 6
+    cond2 = any(char.isdigit() for char in password)
+    cond3 = any(char.isalpha() for char in password)
+    if len(password)> 9: # cond4    
+        cond2 = cond3 = True
+    cond5 = 'password' not in password.lower()
+    cond6 = len(set(password))> 2
+        
+    return all([cond1, cond2, cond3, cond5, cond6])     
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Proszę pokazać mi więcej rozwiązań!<br />
+            bo chcę być prawdziwym 🥇 Pythonem Ninnjaa!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Jasne, proszę łapać!
+        </p>
+        <p>
+            Używanie słownika do przechowywania warunków w tekście jako kluczy i wyrażeń warunkowych jako wartości.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_acceptable_password(password: str) -> bool:
+
+    conditions = {}
+    conditions['length is bigger than 6'] = len(password)> 6
+    conditions['has at least 1 digit'] = any([ch.isdigit() for ch in password])
+    conditions['not just digits'] = any([not ch.isdigit() for ch in password])
+    conditions['no word "password"'] = 'password' not in password.lower()
+    conditions['3 different characters'] = len(set(password))>= 3
+    if len(password)> 9:
+        del conditions['has at least 1 digit']
+        del conditions['not just digits']
+
+    return all(conditions.values())
+        </pre>
+        </div>
+        <p>
+            Jeśli nadal potrzebują Państwo wszystkich funkcji sprawdzających. Użycie poprzedniej funkcji w następnej dodającej nowy warunek:
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">            
+def is_acceptable_passwordI(password: str) -> bool:
+    return len(password)> 6
+        
+def is_acceptable_passwordII(password):
+    return is_acceptable_passwordI(password) and any([c in '0123456789' for c in password])
+
+def is_acceptable_passwordIII(password):
+    return is_acceptable_passwordII(password) and not all([c in '0123456789' for c in password])
+
+def is_acceptable_passwordIV(password):
+    return is_acceptable_passwordIII(password) or len(password)> 9
+
+def is_acceptable_passwordV(password):
+    return is_acceptable_passwordIV(password) and not 'password' in password.lower()
+
+def is_acceptable_password(password):
+    return is_acceptable_passwordV(password) and len(set(list(password)))>= 3
+        </pre>
+        </div>
+        <p>
+            Używając modułu wyrażeń regularnych, proszę szukać podciągu większego niż 6, ze znakiem cyfry i nie cyfry lub podciągu większego niż 9. Oba nie powinny zawierać 'password'.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+import re
+
+
+def is_acceptable_password(p):
+
+    return (bool(re.match(r'(?=.{6,})(?=.*\d.*)(?=.*\D.*)', p)) or           \
+    bool(re.match(r'.{9,}', p))) and not bool(re.search(r'(?i)password', p)) \
+    and len(set(p))>= 3        
+        </pre>
+        </div>
+        <p>
+            Proszę kliknąć <b>Best Solutions</b> w menu misji i zobaczyć wiele innych
+        ciekawych rozwiązań!
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Dzięki! Teraz wiem i rozumiem więcej! Wszystko działa jak należy!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            miło mi to słyszeć! Gratulacje z okazji zaliczenia serii!
+        </p>
+    </div>
+</div>
+</body>
