@@ -1,0 +1,200 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我不知道如何开始解决这个任务。
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            让我们继续从该系列前一个任务的提示中寻找解决办法。
+        </p>
+        <pre class="brush: python">
+def is_acceptable_password(password: str) -> bool:
+
+    cond1 = len(password)> 6
+    cond2 = any(char.isdigit() for char in password)
+    cond3 = any(char.isalpha() for char in password)
+    if len(password)> 9: # cond4    
+        cond2 = cond3 = True
+    cond5 = 'password' not in password.lower()
+        
+    return all([cond1, cond2, cond3, cond5])        
+        </pre>
+        <p>
+            在这个任务中，你应该在这个解决方案中增加检查密码是否至少包含三个不同的字符。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我应该从哪些方面入手？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            要计算序列中的元素数量，只需使用<b class="code">len()</b> 函数，它应该大于2。
+        </p>
+        <pre class="brush: python">
+cond6 = len(...)> 2        
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            好的。但我需要只计算唯一的元素。如何做到这一点？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            阅读关于<a target="_blank" href="https://www.w3schools.com/python/python_sets.asp">sets</a> 。它只允许独特的元素。
+        </p>
+        <pre class="brush: python">
+ar = [1, 2, 3, 2, 3]
+print(set(ar))
+        </pre>
+        <div class="output">
+            <p>输出：</p>
+            <pre>{1, 2, 3}</pre>
+        </div>
+        <p>
+            你应该从你的密码中创建一个集合，并把它作为<b class="code">len()</b> 的参数。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            请给我看整行的内容。
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            请看：
+        </p>
+        <pre class="brush: python">
+cond6 = len(set(password))> 2        
+        </pre>
+        <p>
+           <b class="code">all()</b> 不要忘了将你的新条件添加到<b class="code">return</b> 的函数中。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            那么，我的最终解决方案应该是什么样子的呢？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            这就是了：
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_acceptable_password(password: str) -> bool:
+    
+    cond1 = len(password)> 6
+    cond2 = any(char.isdigit() for char in password)
+    cond3 = any(char.isalpha() for char in password)
+    if len(password)> 9: # cond4    
+        cond2 = cond3 = True
+    cond5 = 'password' not in password.lower()
+    cond6 = len(set(password))> 2
+        
+    return all([cond1, cond2, cond3, cond5, cond6])     
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            告诉我更多的解决方案!<br />
+            因为我想成为一个真正的🥇 Python Ninnjaa!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            当然，抓住它!
+        </p>
+        <p>
+            使用字典来存储条件，以文本为键，以条件表达式为值。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_acceptable_password(password: str) -> bool:
+
+    conditions = {}
+    conditions['length is bigger than 6'] = len(password)> 6
+    conditions['has at least 1 digit'] = any([ch.isdigit() for ch in password])
+    conditions['not just digits'] = any([not ch.isdigit() for ch in password])
+    conditions['no word "password"'] = 'password' not in password.lower()
+    conditions['3 different characters'] = len(set(password))>= 3
+    if len(password)> 9:
+        del conditions['has at least 1 digit']
+        del conditions['not just digits']
+
+    return all(conditions.values())
+        </pre>
+        </div>
+        <p>
+            如果你仍然需要所有的检查函数。在下一个添加新条件时使用前一个函数：
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">            
+def is_acceptable_passwordI(password: str) -> bool:
+    return len(password)> 6
+        
+def is_acceptable_passwordII(password):
+    return is_acceptable_passwordI(password) and any([c in '0123456789' for c in password])
+
+def is_acceptable_passwordIII(password):
+    return is_acceptable_passwordII(password) and not all([c in '0123456789' for c in password])
+
+def is_acceptable_passwordIV(password):
+    return is_acceptable_passwordIII(password) or len(password)> 9
+
+def is_acceptable_passwordV(password):
+    return is_acceptable_passwordIV(password) and not 'password' in password.lower()
+
+def is_acceptable_password(password):
+    return is_acceptable_passwordV(password) and len(set(list(password)))>= 3
+        </pre>
+        </div>
+        <p>
+            使用正则表达式模块，寻找大于6的子串，包含数字和非数字的字符，或者大于9的子串，两者都不能包含 "password"。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+import re
+
+
+def is_acceptable_password(p):
+
+    return (bool(re.match(r'(?=.{6,})(?=.*\d.*)(?=.*\D.*)', p)) or           \
+    bool(re.match(r'.{9,}', p))) and not bool(re.search(r'(?i)password', p)) \
+    and len(set(p))>= 3        
+        </pre>
+        </div>
+        <p>
+            点击任务菜单中的<b>Best Solutions</b> ，可以看到很多其他的
+        有趣的解决方案!
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            谢谢!我现在知道并理解了更多!一切运作正常!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            👍很高兴听到这个消息!祝贺你通过该系列的考试!
+        </p>
+    </div>
+</div>
+</body>
