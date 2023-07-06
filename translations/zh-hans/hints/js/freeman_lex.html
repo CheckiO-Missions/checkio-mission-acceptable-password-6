@@ -1,0 +1,145 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我不知道如何开始解决这个任务。
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            让我们继续从该系列的前一个任务的提示中寻找解决方案。
+        </p>
+        <pre class="brush: javascript">
+function isAcceptablePassword(password: string): boolean {
+
+    const cond1 = password.length> 6;
+    var cond2 = /\d/.test(password);
+    var cond3 = /\D/.test(password);
+    if (password.length> 9) cond2 = cond3 = true; // cond 4
+    const cond5 =!(/password/i.test(password));
+    
+    return!([cond1, cond2, cond3, cond5].includes(false));
+}   
+        </pre>
+        <p>
+            在这个任务中，你应该在你的解决方案中加入检查密码是否至少包含三个不同的字符。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            我应该从哪些方面入手？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            首先，你需要用<a target="_blank" href="https://www.w3schools.com/jsref/jsref_split.asp">split()</a> 方法将<b class="code">password</b> 转换为数组，参数为空字符。 
+        </p>
+        <pre class="brush: javascript">
+password.split("")    
+        </pre>
+        <p>
+            然后，将数组转换为<a target="_blank" href="https://www.w3schools.com/js/js_object_sets.asp">Set()</a> ，只保留唯一的字符。
+        </p>
+        <pre class="brush: javascript">
+new Set(password.split(""))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            但是如何检查这个集合是否至少有三个字符？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            集合有这样的属性：<b class="code">size</b> 。它类似于字符串的<b class="code">length</b> 。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            请给我看整行的内容。
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            请看：
+        </p>
+        <pre class="brush: javascript">
+const cond6 = new Set(password.split("")).size> 2;       
+        </pre>
+        <p>
+            不要忘记将你的新条件添加到<b class="code">return</b> 中的数组中。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            那么，我的最终解决方案应该是什么样子的呢？
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            这就是了：
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+function isAcceptablePassword(password: string): boolean {
+
+    const cond1 = password.length> 6;
+    var cond2 = /\d/.test(password);
+    var cond3 = /\D/.test(password);
+    if (password.length> 9) cond2 = cond3 = true; // cond 4
+    const cond5 =!(/password/i.test(password));
+    const cond6 = new Set(password.split("")).size> 2;
+    
+    return!([cond1, cond2, cond3, cond5, cond6].includes(false));
+}    
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            告诉我更多的解决方案!<br />
+            因为我想成为一个真正的🥇 Javascript英雄!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            当然，抓住它!
+        </p>
+        <p>
+            匿名函数，首先检查 "password "这个词是否在任何情况下都存在，然后，创建集合并检查其长度（大小），然后检查长度是否超过9或超过6并且至少有一个数字和一个字母。这些词组的测试方法是<b class="code">test()</b> 。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: javascript">
+var isAcceptablePassword = pwd =>!pwd.match(/password/i)
+&& new Set([...pwd]).size>2
+&& (pwd.length> 9 || [/.{7,}/, /\d/, /[a-z]/i].every(x=>x.test(pwd)))
+        </pre>
+        </div>
+        <p>
+            点击任务菜单中的<b>Best Solutions</b> ，可以看到很多其他有趣的解决方案!
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            谢谢!我现在知道并理解了更多!一切工作都很顺利!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            👍很高兴听到这个消息!祝贺你通过这一系列的考试!
+        </p>
+    </div>
+</div>
+</body>
