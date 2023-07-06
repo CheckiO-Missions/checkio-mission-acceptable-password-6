@@ -1,0 +1,42 @@
+<!-- Describe task in general -->
+
+<p>
+    在这个任务中，你需要创建一个密码验证功能。
+</p>
+
+<p>验证的条件是：</p>
+
+<ul>
+    <li>长度应大于6；</li>
+    <li>应至少包含一个数字，但不能只包含数字；</li>
+    <li>有数字或只包含数字不适用于长度大于9的密码。</li>
+    <li>一个字符串在任何情况下都不应该包含 "密码 "一词；</li>
+    <li>应至少包含3个不同的（区分大小写）字母（或数字），即使它长于10。</li>
+</ul>
+
+
+
+<!-- Explain input and output values -->
+<p>
+   <strong>输入：</strong>一个字符串 <span>{% if is_js %}(string){% else %}(str){% endif %}</span>.
+</p>
+
+<p>
+   <strong>输出：</strong>一个逻辑值 <span>{% if is_js %}(boolean){% else %}(bool){% endif %}</span>. 
+</p>
+
+
+<!-- Give some usage examples -->
+<div class="for_info_only">
+    <p>
+        <strong>例子：</strong>
+    </p>
+
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+
+<p class="for_info_only">
+    <strong>它是如何使用的：</strong>
+    <i>用于密码验证表。此外，学习如何评估任务也是很好的。</i>
+</p>
