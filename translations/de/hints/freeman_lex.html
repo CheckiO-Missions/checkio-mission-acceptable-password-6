@@ -1,0 +1,200 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Ich habe keine Ahnung, wie ich mit der Lösung dieser Aufgabe beginnen soll.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Lassen Sie uns mit der Lösung aus den Hinweisen der vorherigen Mission der Serie fortfahren.
+        </p>
+        <pre class="brush: python">
+def is_acceptable_password(password: str) -> bool:
+
+    cond1 = len(password)> 6
+    cond2 = any(char.isdigit() for char in password)
+    cond3 = any(char.isalpha() for char in password)
+    if len(password)> 9: # cond4    
+        cond2 = cond3 = True
+    cond5 = 'password' not in password.lower()
+        
+    return all([cond1, cond2, cond3, cond5])        
+        </pre>
+        <p>
+            In dieser Mission sollten Sie zusätzlich zu dieser Lösung prüfen, ob das Passwort mindestens drei verschiedene Zeichen enthält.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Womit soll ich anfangen?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Um die Anzahl der Elemente in der Sequenz zu zählen, verwenden Sie einfach die Funktion <b class="code">len()</b> und sie sollte größer als 2 sein.
+        </p>
+        <pre class="brush: python">
+cond6 = len(...)> 2        
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Gut. Aber ich muss nur eindeutige Elemente zählen. Wie kann ich das tun?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Lesen Sie über <a target="_blank" href="https://www.w3schools.com/python/python_sets.asp">sets</a>. Sie erlaubt nur eindeutige Elemente.
+        </p>
+        <pre class="brush: python">
+ar = [1, 2, 3, 2, 3]
+print(set(ar))
+        </pre>
+        <div class="output">
+            <p>Ausgabe:</p>
+            <pre>{1, 2, 3}</pre>
+        </div>
+        <p>
+            Sie sollten eine Menge aus Ihrem Passwort erstellen und diese als Argument in <b class="code">len()</b> verwenden.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Zeigen Sie mir bitte die ganze Zeile.
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Sehen Sie:
+        </p>
+        <pre class="brush: python">
+cond6 = len(set(password))> 2        
+        </pre>
+        <p>
+            Und vergessen Sie nicht, Ihre neue Bedingung in die Funktion <b class="code">all()</b> in <b class="code">return</b> einzutragen.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Wie sollte also meine endgültige Lösung aussehen?
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Hier ist sie:
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_acceptable_password(password: str) -> bool:
+    
+    cond1 = len(password)> 6
+    cond2 = any(char.isdigit() for char in password)
+    cond3 = any(char.isalpha() for char in password)
+    if len(password)> 9: # cond4    
+        cond2 = cond3 = True
+    cond5 = 'password' not in password.lower()
+    cond6 = len(set(password))> 2
+        
+    return all([cond1, cond2, cond3, cond5, cond6])     
+        </pre>
+        </div>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Zeigen Sie mir mehr Lösungen!<br />
+            denn ich will eine echte 🥇 Python Ninnjaa sein!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            Klar, schnapp sie dir!
+        </p>
+        <p>
+            Verwenden Sie ein Wörterbuch, um Bedingungen im Text als Schlüssel und bedingte Ausdrücke als Werte zu speichern.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_acceptable_password(password: str) -> bool:
+
+    conditions = {}
+    conditions['length is bigger than 6'] = len(password)> 6
+    conditions['has at least 1 digit'] = any([ch.isdigit() for ch in password])
+    conditions['not just digits'] = any([not ch.isdigit() for ch in password])
+    conditions['no word "password"'] = 'password' not in password.lower()
+    conditions['3 different characters'] = len(set(password))>= 3
+    if len(password)> 9:
+        del conditions['has at least 1 digit']
+        del conditions['not just digits']
+
+    return all(conditions.values())
+        </pre>
+        </div>
+        <p>
+            Wenn Sie noch alle Prüffunktionen benötigen. Verwenden Sie die vorherige Funktion, um eine neue Bedingung hinzuzufügen:
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">            
+def is_acceptable_passwordI(password: str) -> bool:
+    return len(password)> 6
+        
+def is_acceptable_passwordII(password):
+    return is_acceptable_passwordI(password) and any([c in '0123456789' for c in password])
+
+def is_acceptable_passwordIII(password):
+    return is_acceptable_passwordII(password) and not all([c in '0123456789' for c in password])
+
+def is_acceptable_passwordIV(password):
+    return is_acceptable_passwordIII(password) or len(password)> 9
+
+def is_acceptable_passwordV(password):
+    return is_acceptable_passwordIV(password) and not 'password' in password.lower()
+
+def is_acceptable_password(password):
+    return is_acceptable_passwordV(password) and len(set(list(password)))>= 3
+        </pre>
+        </div>
+        <p>
+            Suchen Sie mit Hilfe des Moduls für reguläre Ausdrücke nach einer Teilzeichenkette, die größer als 6 ist, mit einer Ziffer und einer Nichtziffer oder einer Teilzeichenkette, die größer als 9 ist. Beide sollten nicht 'password' enthalten.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+import re
+
+
+def is_acceptable_password(p):
+
+    return (bool(re.match(r'(?=.{6,})(?=.*\d.*)(?=.*\D.*)', p)) or           \
+    bool(re.match(r'.{9,}', p))) and not bool(re.search(r'(?i)password', p)) \
+    and len(set(p))>= 3        
+        </pre>
+        </div>
+        <p>
+            Klicken Sie im Missionsmenü auf <b>Best Solutions</b> und sehen Sie sich eine Menge anderer
+        interessante Lösungen!
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <p>
+            Danke! Ich weiß und verstehe jetzt mehr! Alles funktioniert bestens!
+        </p>
+    </div>
+    <div class="answer">
+        <p>
+            👍 Freut mich zu hören! Herzlichen Glückwunsch zum Bestehen der Serie!
+        </p>
+    </div>
+</div>
+</body>
